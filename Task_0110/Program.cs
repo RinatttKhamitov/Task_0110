@@ -48,21 +48,26 @@ namespace Task_0110
             {
                 randint[i] = rnd.Next();
                 Console.Write($"{i + 1}={randint[i]} ");
-            }
-            Console.WriteLine("Введи два числа (0 <= n1, n2 <= 20)");
+            }   
+            Console.WriteLine("Введи два числа из массива");
             Console.Write("n1 = ");
             int n1 = int.Parse(Console.ReadLine());
             Console.Write("n2 = ");
             int n2 = int.Parse(Console.ReadLine());
-            int num = randint[n1 - 1];
-            randint[n1 - 1] = randint[n2 - 1];
-            randint[n2 - 1] = num;
+            int ind1 = Array.IndexOf(randint, n1);
+            int ind2 = Array.IndexOf(randint, n2);
+            int cop = 0;
+            cop = randint[ind1];
+            randint[ind1] = randint[ind2];
+            randint[ind2] = cop;
             int c = 1;
             foreach (int h in randint)
             {
                 Console.Write($"{c}={h} ");
                 c++;
             }
+
+
             Console.ReadKey();
             Console.Clear();
             Console.WriteLine("Задача 3");
@@ -121,7 +126,7 @@ namespace Task_0110
             Console.ReadKey();
             Console.Clear();
             Console.WriteLine("Задача 5");
-            num = 0;
+            int num = 0;
             string str;
             do
             {
@@ -237,6 +242,56 @@ namespace Task_0110
             Console.WriteLine($"у {ded3.name} {Babka(ded3, "тупой", "проститутки")} синяков");
             Console.WriteLine($"у {ded4.name} {Babka(ded4, "гей", "гады")} синяков");
             Console.WriteLine($"у {ded5.name} {Babka(ded5, "геи", "тупой", "проститутки", "гады")} синяков");
+
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("Задача 7");
+            int[] numbers2 = { 1, 4, 65, 5, 343, 1 - 101, 4 };
+            int[] sortedArray = QuickSort(numbers2, 0, numbers2.Length - 1);
+
+            Console.WriteLine($"Список = {string.Join(", ", sortedArray)}");
+
+            Console.ReadLine();
+        }
+        private static int[] QuickSort(int[] array, int minIndex, int maxIndex)
+        {
+            if (minIndex >= maxIndex)
+            {
+                return array;
+            }
+
+            int pivotIndex = GetPivotIndex(array, minIndex, maxIndex);
+
+            QuickSort(array, minIndex, pivotIndex - 1);
+
+            QuickSort(array, pivotIndex + 1, maxIndex);
+
+            return array;
+        }
+
+        private static int GetPivotIndex(int[] array, int minIndex, int maxIndex)
+        {
+            int pivot = minIndex - 1;
+            int copy = 0;
+            for (int i = minIndex; i <= maxIndex; i++)
+            {
+                if (array[i] < array[maxIndex])
+                {
+                    pivot++;
+                    copy = array[pivot];
+                    array[pivot] = array[i];
+                    array[i] = copy;
+
+                }
+            }
+
+            pivot++;
+            copy = array[pivot];
+            array[pivot] = array[maxIndex];
+            array[maxIndex] = copy;
+
+            return pivot;
         }
     }
+
 }

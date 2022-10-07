@@ -26,28 +26,53 @@ namespace test
     {
         static void Main(string[] args)
         {
-            Zloyded ded = new Zloyded("Вася", new string[] {"проститутки", "гады" });
-            Zloyded ded2 = new Zloyded("Петар", new string[] { "геи", "тупой", "проститутки", "гады" });
-            Zloyded ded3 = new Zloyded("Валентин", new string[] { "геи", "гады" });
-            Zloyded ded4 = new Zloyded("Николай", new string[] { "гады"}, 6);
-            Zloyded ded5 = new Zloyded("Рома", new string[] { "тупой", "проститутки"}, 3);
+            int[] numbers = { 1 , 4,65,5 ,343,1 - 101, 4 };
+            int[] sortedArray = QuickSort(numbers, 0, numbers.Length - 1);
 
-            int Babka(Zloyded ded, params string[] curse_words)
-            {
-                foreach (string curse in curse_words)
-                {
-                    if (ded.phrases_for_пrumbling.Contains(curse))
-                    {
-                        ded.count_bruises++;
-                    }
-                }
-                return ded.count_bruises;
-            }
-            Console.WriteLine($"у {ded.name} {Babka(ded, "гей", "проститутки")} синяков");
-            Console.WriteLine($"у {ded2.name} {Babka(ded2, "гады")} синяков");
-            Console.WriteLine($"у {ded3.name} {Babka(ded3, "тупой", "проститутки")} синяков");
-            Console.WriteLine($"у {ded4.name} {Babka(ded4, "гей", "гады")} синяков");
-            Console.WriteLine($"у {ded5.name} {Babka(ded5, "геи", "тупой", "проститутки", "гады")} синяков");
+            Console.WriteLine($"Список = {string.Join(", ", sortedArray)}");
+
+            Console.ReadLine();
         }
+        private static int[] QuickSort(int[] array, int minIndex, int maxIndex)
+        {
+            if (minIndex >= maxIndex)
+            {
+                return array;
+            }
+
+            int pivotIndex = GetPivotIndex(array, minIndex, maxIndex);
+
+            QuickSort(array, minIndex, pivotIndex - 1);
+
+            QuickSort(array, pivotIndex + 1, maxIndex);
+
+            return array;
+        }
+
+        private static int GetPivotIndex(int[] array, int minIndex, int maxIndex)
+        {
+            int pivot = minIndex - 1;
+            int copy = 0;
+            for (int i = minIndex; i <= maxIndex; i++)
+            {
+                if (array[i] < array[maxIndex])
+                {
+                    pivot++;
+                    copy = array[pivot];
+                    array[pivot] = array[i];
+                    array[i] = copy;
+
+                }
+            }
+
+            pivot++;
+            copy = array[pivot];
+            array[pivot] = array[maxIndex];
+            array[maxIndex] = copy;
+
+            return pivot;
+        }
+
+
     }
 }
