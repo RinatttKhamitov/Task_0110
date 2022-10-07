@@ -39,7 +39,7 @@ namespace Тумаков
                     return 0;
                 }
             }
-           Console.WriteLine(Factorial(50000000));
+            Console.WriteLine(Factorial(50000000));
 
             int Factorial2(int n)
             {
@@ -51,6 +51,51 @@ namespace Тумаков
                 return n * Factorial2(n - 1);
             }
             Console.WriteLine(Factorial(5));
+            Console.WriteLine(Euclid(12, 36));
+            Console.WriteLine(Euclid(4, 12, 36));
+
+        }
+        public static int Euclid(int a, int b)
+        {
+            while (a != 0 && b != 0)
+            {
+                if (a > b)
+                {
+                    a = a % b;
+                }
+                else
+                { 
+                    b = b % a;
+                }
+            }
+            return a + b;
+        }
+        public static int Euclid(int a, int b, int c)
+        {
+            while (a != 0 && b != 0)
+            {
+                if (a > b)
+                {
+                    a = a % b;
+                }
+                else
+                { 
+                    b = b % a;
+                }
+            }
+            while (c != 0 && b != 0)
+            {
+                if (c > b)
+                {
+                    c = c % b;
+                }
+                else
+                {
+                    b = b % c;
+                }
+            }
+            return Math.Min(a + b, b + c);
         }
     }
+
 }
